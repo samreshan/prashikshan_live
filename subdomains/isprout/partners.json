@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Techspire College",
+        "type": "Knowledge Partner",
+        "image": "images/partners/techspire.png"
+    },
+    {
+        "name": "Investment Circle",
+        "type": "Investment Partner",
+        "image": "images/partners/investment-circle.png"
+    },
+    {
+        "name": "NBAC",
+        "type": "Investment Partner",
+        "image": "images/partners/nbac.png"
+    },
+    {
+        "name": "Revamp Nepal",
+        "type": "Growth Partner",
+        "image": "images/partners/revamp-nepal.png"
+    }
+]

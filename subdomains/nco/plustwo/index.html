@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Learn about the National Cyber Olympiad Nepal and its mission to enhance ICT knowledge among school students."
+    />
+    <meta
+      name="keywords"
+      content="Cyber Olympiad, About NCO, Nepal, ICT Competition, Technology Learning"
+    />
+    <title>+2 Edition | National Cyber Olympiad Nepal</title>
+
+    <link
+      rel="shortcut icon"
+      href="../assets/img/NCO_Final_Logo.png"
+      type="image/x-icon"
+    />
+    <!-- External Stylesheets -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/navfoot.css" />
+    <link rel="stylesheet" href="../assets/css/newstyle.css" />
+    <!-- <base href="https://nco.prashikshan.edu.np/" /> -->
+    <style>
+    .pdf-container {
+        width: 100%;
+        max-width: 800px;
+        height: 500px; /* Set a fixed height for scrollability */
+        margin: auto;
+        overflow-y: auto; /* Enable vertical scrolling */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fff;
+    }
+    .pdf-page {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+    canvas {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+        .card{
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+ <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="../assets/img/NCO_Final_Logo.png" alt="NCO Logo" class="d-inline-block align-text-top" style="width: 100px; height: auto;" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#events">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="../about/index.html">About</a></li>
+          <li class="nav-item"><a class="nav-link disabled" href="../resources/">Resources</a></li>
+          <li class="nav-item"><a class="nav-link disabled" href="/tiesheet">Tiesheet</a></li>
+          <li class="nav-item"><a class="nav-link" href="../register">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ <!-- Bootstrap Cards to Hold PDF Pages -->
+<div class="container mt-4">
+    <!-- First PDF Viewer -->
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>Orientation Slides</h5>
+        <div>
+          <button class="btn btn-primary btn-sm show-all-btn">Show All</button>
+          <button class="btn btn-secondary btn-sm show-less-btn" style="display: none;">Show Less</button>
+        </div>
+      </div>
+      <div class="card-body pdf-container" data-pdf="../../assets/files/orientationSlides2.pdf"></div>
+    </div>
+  
+    <!-- Second PDF Viewer -->
+    <div class="card mt-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>Rules and Regulations</h5>
+        <div>
+          <button class="btn btn-primary btn-sm show-all-btn">Show All</button>
+          <button class="btn btn-secondary btn-sm show-less-btn" style="display: none;">Show Less</button>
+        </div>
+      </div>
+      <div class="card-body pdf-container" data-pdf="../../assets/files/RoundDetails&sampleQuestion.pdf"></div>
+    </div>
+  </div>
+  
+  <!-- Include PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const pdfContainers = document.querySelectorAll(".pdf-container");
+  
+      pdfContainers.forEach(container => {
+        const pdfUrl = container.dataset.pdf;
+        const showAllBtn = container.parentElement.querySelector(".show-all-btn");
+        const showLessBtn = container.parentElement.querySelector(".show-less-btn");
+        let pdfDoc = null;
+        let allPagesLoaded = false; // Track if all pages are loaded
+  
+        function renderPage(pdf, pageNum, clearContainer = false) {
+          if (clearContainer) container.innerHTML = ""; // Clear previous content
+  
+          pdf.getPage(pageNum).then(page => {
+            const scale = 1.5;
+            const viewport = page.getViewport({ scale });
+  
+            // Create a canvas for each page
+            const canvas = document.createElement("canvas");
+            canvas.className = "pdf-page";
+            canvas.style.width = "100%";
+            canvas.style.display = "block";
+            canvas.style.marginBottom = "10px";
+            container.appendChild(canvas);
+  
+            const context = canvas.getContext("2d");
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+  
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport,
+            };
+  
+            page.render(renderContext);
+          });
+        }
+  
+        // Load the first page initially
+        pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+          pdfDoc = pdf;
+          renderPage(pdf, 1);
+        }).catch(error => {
+          console.error("Error loading PDF:", error);
+          container.innerHTML = `<p style="color: red;">Failed to load the PDF. Check the file path.</p>`;
+        });
+  
+        // Show all pages when the button is clicked
+        showAllBtn.addEventListener("click", function () {
+          if (allPagesLoaded) return; // Prevent duplicate loading
+  
+         if (pdfDoc) {
+           for (let pageNum = 2; pageNum <= pdfDoc.numPages; pageNum++) {
+            renderPage(pdfDoc, pageNum);
+           }
+           allPagesLoaded = true;
+          showAllBtn.style.display = "none"; // Hide Show All button
+           showLessBtn.style.display = "inline-block"; // Show Show Less button
+         }
+         });
+  
+        // Show only the first page when "Show Less" is clicked
+        showLessBtn.addEventListener("click", function () {
+          if (pdfDoc) {
+            renderPage(pdfDoc, 1, true);
+            allPagesLoaded = false;
+            showLessBtn.style.display = "none"; // Hide Show Less button
+            showAllBtn.style.display = "inline-block"; // Show Show All button
+          }
+        });
+      });
+    });
+  </script>
+  
+</body>
+</html>

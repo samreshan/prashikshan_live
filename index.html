@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prashikshan - Elevating People, Transforming Organizations</title>
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+    /* Subtle 'Coming Soon' CTA styling and tooltip for hero */
+    .cta-button.subtle {
+        background: rgba(255,255,255,0.06);
+        color: rgba(20, 155, 20, 0.9);
+        /* border: 1px solid rgba(255,255,255,0.2); */
+        opacity: 0.95;
+        position: relative;
+        transition: background-color 180ms ease, opacity 180ms ease, transform 120ms ease;
+        cursor: default;
+    }
+    .cta-button.subtle:hover {
+        /* transform: translateY(-1px); */
+        opacity: 1;
+    }
+    .cta-button.subtle[data-tooltip]::after{
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.8);
+        color: #fbfcfb;
+        padding: 6px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 120ms ease, transform 120ms ease;
+    }
+    .cta-button.subtle:hover[data-tooltip]::after{
+        opacity: 1;
+        transform: translateX(-50%) translateY(-4px);
+    }
+    /* Slightly reduce icon opacity inside subtle button */
+    .cta-button.subtle .feather-inline { opacity: 1; width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;}
+    </style>
+    <link rel="shortcut icon" href="images/prashikshanLogo.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="images/prashikshanLogo.png" alt="Prashikshan Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Elevating <span>People</span>.<br>Transforming <span>Organizations</span>.</h1>
+            <p>Your journey from learning to leadership starts here</p>
+            <div class="hero-buttons">
+                <a href="/branding-playbook-pok" class="cta-button cta-button-secondary subtle">
+                <!-- <a href="/branding-playbook-pok" class="cta-button cta-button-secondary subtle" data-tooltip="Coming Soon" aria-label="Branding Playbook: Pokhara Edition (Coming Soon)" aria-disabled="true"> -->
+                    Branding Playbook: Pokhara Edition
+                </a>
+                <a href="#programs" class="cta-button">
+                    <i data-feather="compass" class="feather-inline"></i> Explore Programs
+                </a>
+                <!-- <a href="#contact" class="cta-button cta-button-secondary">
+                    <i data-feather="message-circle" class="feather-inline"></i> Get Started
+                </a> -->
+            </div><br>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section class="journey" id="journey">
+        <div class="container">
+            <h2 class="section-title">Your Transformation Journey</h2>
+            <p class="section-subtitle">We guide you through every stage of professional growth</p>
+            <div class="journey-grid" id="journeyGrid"></div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <h2 class="section-title">Programs & Initiatives</h2>
+            <p class="section-subtitle">Tailored solutions for individuals and organizations</p>
+            <div class="programs-grid" id="programsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact" id="impact">
+        <div class="container">
+            <h2 class="section-title">Our Impact</h2>
+            <p class="section-subtitle">Numbers that tell our story</p>
+            <div class="impact-stats" id="impactStats"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Prashikshan</h4>
+                <p>Innovation • Leadership • Training • Consulting</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/prashikshan" target="_blank">
+                        <i data-feather="facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/prashikshann/" target="_blank">
+                        <i data-feather="instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/prashikshan" target="_blank">
+                        <i data-feather="linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#programs"><i data-feather="chevron-right" style="width: 16px; height: 16px;"></i> Programs</a>
+                <a href="#journey"><i data-feather="chevron-right" style="width: 16px; height: 16px;"></i> About Us</a>
+                <a href="#impact"><i data-feather="chevron-right" style="width: 16px; height: 16px;"></i> Impact</a>
+                <a href="https://nco.prashikshan.edu.np"><i data-feather="chevron-right" style="width: 16px; height: 16px;"></i> NCO</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <a href="mailto:info@prashikshan.edu.np">
+                    <i data-feather="mail" style="width: 16px; height: 16px;"></i> info@prashikshan.edu.np
+                </a>
+                <a href="tel:+9779851037897">
+                    <i data-feather="phone" style="width: 16px; height: 16px;"></i> +977 9851037897
+                </a>
+                <a href="#">
+                    <i data-feather="map-pin" style="width: 16px; height: 16px;"></i> Kathmandu, Nepal
+                </a>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Stay updated with our latest programs and events</p>
+                <a href="#" class="cta-button" style="display: inline-flex; margin-top: 10px;">
+                    Subscribe <i data-feather="arrow-right" style="width: 18px; height: 18px; margin-left: 8px;"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Prashikshan. All Rights Reserved. | Elevating People, Transforming Organizations</p>
+        </div>
+    </footer>
+
+    <script src="js/content.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
