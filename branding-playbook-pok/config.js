@@ -43,7 +43,7 @@ window.PLAYBOOK_CONFIG = {
         "name": "Bar Peepal Resort, Pokhara",
         "neighborhood": "Lakeside, Pokhara",
         "travelSupport": "Assistance available for anyone participating outside of Pokhara",
-        "mapSrc": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3515.7822327070057!2d83.96146397625158!3d28.21392810296541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19d71f53ff0f%3A0x43ec4135933502d1!2sMercure%20Kathmandu%20Sukedhara%20Heights!5e0!3m2!1sen!2snp!4v1751792076703!5m2!1sen!2snp"
+        "mapSrc": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3515.782232707!2d83.9614639761127!3d28.213928102965586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399595c5f8c70363%3A0x21b977e2a249b17f!2sBar%20Peepal%20Resort%20Pokhara!5e0!3m2!1sne!2snp!4v1771380428518!5m2!1sne!2snp"
     },
     "attendees": {
         "show": false

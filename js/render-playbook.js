@@ -6,13 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const updateText = (selector, text) => {
-    const el = document.querySelector(selector);
-    if (el && text) el.textContent = text;
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(el => {
+      if (text) el.textContent = text;
+    });
   };
 
   const updateHref = (selector, href) => {
-    const el = document.querySelector(selector);
-    if (el && href) el.setAttribute('href', href);
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(el => {
+      if (href) el.setAttribute('href', href);
+    });
   };
 
   // --- Meta ---
@@ -23,12 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Hero Section ---
   if (data.hero) {
     updateText('.hero-label', data.hero.label);
-    updateText('.hero-title + span', data.hero.dates); 
-    updateText('.hero-title + span + span', data.hero.location); 
-    updateHref('.hero-cta', data.hero.applyLink);
+    updateText('[data-field="dates"]', data.hero.dates); 
+    updateText('[data-field="location"]', data.hero.location); 
+    updateHref('[data-field="apply-link"]', data.hero.applyLink);
     updateText('.hero-note', data.hero.note);
     updateHref('.cta-button', data.hero.applyLink); 
-    updateHref('.section-nav__cta .cta-button', data.hero.applyLink); 
   }
 
   // --- About Section ---
@@ -94,6 +97,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const mapFrame = venueSection.querySelector('iframe');
         if (mapFrame) mapFrame.src = data.venue.mapSrc;
+    }
+  }
+  // --- Trainer Section ---
+  if (data.trainer) {
+    const trainerAvatar = document.querySelector('.trainer-avatar');
+    if (trainerAvatar) {
+        if (data.trainer.imageType === 'image') {
+            trainerAvatar.innerHTML = `<img src="${data.trainer.content}" alt="Trainer">`;
+        } else {
+            trainerAvatar.textContent = data.trainer.content;
+        }
     }
   }
 
