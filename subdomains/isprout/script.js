@@ -437,8 +437,21 @@ async init() {
     }
 
     toggleMobileMenu() {
-        // Implementation for mobile menu (would require mobile menu HTML)
-        console.log('Mobile menu toggle - implement mobile menu HTML structure');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger?.classList.toggle('active');
+        navLinks?.classList.toggle('active');
+    }
+
+    closeMobileMenu() {
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        if (navLinks?.classList.contains('active')) {
+            hamburger?.classList.remove('active');
+            navLinks?.classList.remove('active');
+        }
     }
 
     handleNavClick(e) {
@@ -458,6 +471,9 @@ async init() {
                 link.classList.remove('active');
             });
             e.target.classList.add('active');
+
+            // Close mobile menu if open
+            this.closeMobileMenu();
         }
     }
 
@@ -484,8 +500,13 @@ async init() {
 
     handleKeyNavigation(e) {
         if (e.key === 'Escape') {
-            // Close any open modals or mobile menus
-            console.log('Escape key pressed - close modals');
+            // Close mobile menu if open
+            this.closeMobileMenu();
+
+            // Close any generic modals if they exist
+            document.querySelectorAll('.modal.active, .modal.show').forEach(modal => {
+                modal.classList.remove('active', 'show');
+            });
         }
     }
 
