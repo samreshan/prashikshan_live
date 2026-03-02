@@ -3,6 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabs = Array.from(document.querySelectorAll('.bp-tab'));
   const panels = Array.from(document.querySelectorAll('.bp-panel'));
 
+  const tabsByTarget = new Map();
+  tabs.forEach(tab => {
+    const target = tab.dataset.target;
+    if (target) tabsByTarget.set(target, tab);
+  });
+
+  const panelsById = new Map();
+  panels.forEach(panel => {
+    if (panel.id) panelsById.set(panel.id, panel);
+  });
+
   // Mobile Menu Toggle
   const mobileMenu = document.querySelector('.mobile-menu');
   const navLinks = document.querySelector('.nav-links');
@@ -76,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const activateTabById = (id, { scroll = false, updateHash = true } = {}) => {
     if (!id) return;
-    const tab = tabs.find(button => button.dataset.target === id);
+    const tab = tabsByTarget.get(id);
     if (tab) {
       activateTab(tab, { updateHash, scrollIntoView: scroll });
     }
@@ -111,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetId = target.replace('#', '');
       if (!targetId) return;
 
-      const panel = panels.find(item => item.id === targetId);
+      const panel = panelsById.get(targetId);
       if (panel) {
         event.preventDefault();
         activateTabById(targetId, { scroll: true });
