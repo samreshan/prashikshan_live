@@ -21,16 +21,19 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:customers,email',
             'phone_number' => 'required|string|unique:customers,phone_number',
             'dob' => 'required|date',
             'password' => 'required|string|min:8|confirmed',
+            'address' => 'nullable|string',
+            'insurance_company_id' => 'nullable|exists:insurance_companies,id',
+            'insurance_product_id' => 'nullable|exists:insurance_products,id',
         ]);
 
-        $customer = Customer::create($request->all());
+        $customer = Customer::create($validated);
 
         return redirect()->route('admin.customers.index')->with('success', 'Customer created successfully!');
     }
@@ -43,16 +46,26 @@ class CustomerController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:customers,email,' . $id,
             'phone_number' => 'required|string|unique:customers,phone_number,' . $id,
             'dob' => 'required|date',
+            'password' => 'nullable|string|min:8|confirmed',
+            'address' => 'nullable|string',
+            'insurance_company_id' => 'nullable|exists:insurance_companies,id',
+            'insurance_product_id' => 'nullable|exists:insurance_products,id',
         ]);
 
         $customer = Customer::findOrFail($id);
-        $customer->update($request->all());
+
+        // Remove password from validated data if it's null or empty
+        if (empty($validated['password'])) {
+            unset($validated['password']);
+        }
+
+        $customer->update($validated);
 
         return redirect()->route('admin.customers.index')->with('success', 'Customer updated successfully!');
     }
